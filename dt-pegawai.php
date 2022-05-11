@@ -1,3 +1,20 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "pegawai";
+
+//buat connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+//cek connection
+if(!$conn){
+	die("Connection failed: ".mysqli_connect_error());
+}
+
+$sql= "Select * from db_pegawai WHERE ID =$_GET[key]";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,5 +146,28 @@
 			</div>	
 		</div>
 	</form>
+<?php 
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
+	$dbname = "pegawai";
+
+	//buat connection
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+	//cek connection
+	if(!$conn){
+		die("Connection failed: ".mysqli_connect_error());
+	}
+
+	if(isset($_POST['btnupdate'])){
+		$sql="Update datapegawai SET ID='$_POST[ID]', Nama='$_POST[nama]', Alamat='$_POST[alamat]', Email='$_POST[email]', Kode Jabatan='$_POST[jbtn]'";
+		if(mysqli_query($conn,$sql)){
+			echo "Data berhasil diubah";
+		}else{
+			echo"Data tidak berhasil diubah, eror".$sql."<br>". mysqli_error($conn);
+		}
+		mysqli_close($conn);
+	}
+?>
 </body>
 </html>
